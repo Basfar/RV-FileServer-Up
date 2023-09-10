@@ -21,6 +21,10 @@ public class SecurityConfig {
 
     private final AuthenticationProvider authenticationProvider;
 
+    private  final String[] WEB_WHITELIST = {
+            "api/v1/auth/**"
+    };
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
 
@@ -28,7 +32,7 @@ public class SecurityConfig {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("")
+                .requestMatchers(WEB_WHITELIST)
                 .permitAll()
                 .anyRequest()
                 .authenticated()
